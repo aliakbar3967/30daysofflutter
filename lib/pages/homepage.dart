@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/drawer.dart';
+
 class HomePage extends StatelessWidget {
 
    final int days = 30;
@@ -19,7 +21,7 @@ class HomePage extends StatelessWidget {
             child: Text("this tutorial will be completed in $dayhours "),
           ),
         ),
-        drawer: Drawer(),
+        drawer: MyDrawer(),
       );
   }
 }
