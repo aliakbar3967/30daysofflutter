@@ -1,52 +1,113 @@
+import 'package:catlog_app/utils/routues.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
-  
+class LoginPage extends StatefulWidget {
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  String name = "";
+  bool changeButton = false;
 
   @override
   Widget build(BuildContext context) {
     return Material(
       color: Colors.white,
-      child: Column(
-        children: [
-          SizedBox(height: 40,),
-          Image.asset("assets/images/login.png",fit: BoxFit.cover, ),
-          SizedBox(height: 20,),
-          Text("Login To Continue",style: TextStyle(
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
-          ),),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(
+              height: 40,
+            ),
+            Image.asset(
+              "assets/images/login.png",
+              fit: BoxFit.cover,
+              height: 250,
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              "Login To Continue $name",
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+              child: Column(
+                children: [
+                  TextFormField(
+                    decoration: InputDecoration(
+                      hintText: "Enter UserName",
+                    ),
+                    onChanged: (value) {
+                      name = value;
+                      setState(() {});
+                    },
+                  ),
+                  TextFormField(
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      hintText: "Enter Password",
+                      labelText: "Password",
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
 
-          SizedBox(height: 20,),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
-          child: Column(
-            children: [
-                TextFormField(
-              decoration: InputDecoration(
-                hintText: "Enter UserName",
-                labelText: "Username",
+                  InkWell(
+                    onTap: () async {
+                      setState(() {
+                        changeButton = true;
+                      });
+                      await Future.delayed(Duration(seconds: 1));
+                      Navigator.pushNamed(context, MyRoutes.homeRoute);
+                    },
+                    child: AnimatedContainer(
+                      duration: Duration(seconds: 1),
+                      width: changeButton ? 50 : 250,
+                      height: 50,
+                      alignment: Alignment.center,
+                      child: changeButton
+                          ? Icon(
+                              Icons.done,
+                              color: Colors.white,
+                            )
+                          : Text(
+                              "Login",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14,
+                              ),
+                            ),
+                      decoration: BoxDecoration(
+                          color: Colors.deepPurpleAccent,
+                          // shape:
+                          //     changeButton ? BoxShape.circle : BoxShape.rectangle,
+                          borderRadius:
+                              BorderRadius.circular(changeButton ? 50 : 8)),
+                    ),
+                  ),
+                  // ElevatedButton(
+                  //     onPressed: () {
+                  //       Navigator.pushNamed(context, MyRoutes.homeRoute);
+                  //     },
+                  //     child: Text("Login"),
+                  //     style:
+                  //         TextButton.styleFrom(minimumSize: Size(150, 40))),
+                ],
               ),
-            ),
-            TextFormField(
-              obscureText: true,
-              decoration: InputDecoration(
-                hintText: "Enter UserName",
-                labelText: "Username",
-              ),
-            ),
-            SizedBox(height: 20,),
-            ElevatedButton(onPressed: () {
-              print("Hi Welcome to Login Page you will be redirect to home Screen soon");
-            }, child:Text("Login"),
-            style: TextButton.styleFrom(foregroundColor: Colors.green)
             )
-
-
-            ],
-          ),
-        )
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class HomePage extends StatelessWidget {
 
    final int days = 30;
-    final int dayhours = 2; 
+    final String dayhours ="2 days"; 
     final String name = "Ali Akbar";
 
   
@@ -16,7 +16,7 @@ class HomePage extends StatelessWidget {
       ),
         body: Center(
           child: Container(
-            child: Text("this tutorial will be completed in $dayhours days by $name"),
+            child: Text("this tutorial will be completed in $dayhours "),
           ),
         ),
         drawer: Drawer(),
